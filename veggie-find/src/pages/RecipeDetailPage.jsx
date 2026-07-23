@@ -14,7 +14,7 @@ function RecipeDetailPage() {
       try {
         const data = await getRecipeById(id);
         setRecipe(data);
-      } catch (err) {
+      } catch {
         setError("Impossibile caricare la ricetta.");
       } finally {
         setLoading(false);
