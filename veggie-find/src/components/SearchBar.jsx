@@ -15,7 +15,7 @@ function SearchBar() {
     try {
       const data = await searchRecipes(input);
       setResults(data);
-    } catch (err) {
+    } catch {
       setError("Errore durante la ricerca. Riprova.");
     } finally {
       setLoading(false);
