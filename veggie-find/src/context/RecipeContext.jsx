@@ -17,4 +17,5 @@ export const RecipeProvider = ({ children }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useRecipe = () => useContext(RecipeContext);
