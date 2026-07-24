@@ -13,11 +13,13 @@ RUN npm ci
 
 COPY . .
 
-# La chiave Spoonacular serve già in fase di build perché Vite la
-# "incorpora" nel bundle JS (le variabili VITE_* non esistono più a runtime).
-# Viene passata da docker-compose tramite build args, mai hardcoded qui.
+# La chiave Spoonacular e il DSN di Sentry servono già in fase di build perché
+# Vite li "incorpora" nel bundle JS (le variabili VITE_* non esistono più a runtime).
+# Vengono passate da docker-compose/CI tramite build args, mai hardcoded qui.
 ARG VITE_SPOONACULAR_KEY
+ARG VITE_SENTRY_DSN
 ENV VITE_SPOONACULAR_KEY=$VITE_SPOONACULAR_KEY
+ENV VITE_SENTRY_DSN=$VITE_SENTRY_DSN
 
 RUN npm run build
 

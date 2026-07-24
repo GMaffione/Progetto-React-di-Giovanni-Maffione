@@ -34,7 +34,12 @@ jobs:
       - name: Build dell'immagine Docker
         env:
           VITE_SPOONACULAR_KEY: ${{ secrets.VITE_SPOONACULAR_KEY }}
-        run: docker build --build-arg VITE_SPOONACULAR_KEY="$VITE_SPOONACULAR_KEY" -t veggiefind-frontend:ci .
+          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
+        run: |
+          docker build \
+            --build-arg VITE_SPOONACULAR_KEY="$VITE_SPOONACULAR_KEY" \
+            --build-arg VITE_SENTRY_DSN="$VITE_SENTRY_DSN" \
+            -t veggiefind-frontend:ci .
 
   deploy:
     needs: lint-and-build
@@ -61,6 +66,7 @@ jobs:
       - name: Build di produzione (Vite)
         env:
           VITE_SPOONACULAR_KEY: ${{ secrets.VITE_SPOONACULAR_KEY }}
+          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
         run: npm run build
 
       - name: Deploy su Netlify
